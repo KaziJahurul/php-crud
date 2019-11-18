@@ -6,27 +6,31 @@
   *
   */
 
-if (isset($_POST['submit'])) {
-  try {
-    require "../config.php";
-    require "../common.php";
+  require "../config.php";
+  require "../common.php";
 
-    $connection = new PDO($dsn, $username, $password, $options);
+  if (isset($_POST['submit'])) {
 
-    $sql = "SELECT *
-    FROM users
-    WHERE location = :location";
+    if (!hash_equals($_SESSION['csrf'], $_POST['csrf'])) die();
 
-    $location = $_POST['location'];
+    try {
 
-    $statement = $connection->prepare($sql);
-    $statement->bindParam(':location', $location, PDO::PARAM_STR);
-    $statement->execute();
+        $connection = new PDO($dsn, $username, $password, $options);
 
-    $result = $statement->fetchAll();
-  } catch(PDOException $error) {
-    echo $sql . "<br>" . $error->getMessage();
-  }
+        $sql = "SELECT *
+        FROM users
+        WHERE location = :location";
+
+        $location = $_POST['location'];
+
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':location', $location, PDO::PARAM_STR);
+        $statement->execute();
+
+        $result = $statement->fetchAll();
+    } catch(PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
 }
 ?>
 <?php require "templates/header.php"; ?>
