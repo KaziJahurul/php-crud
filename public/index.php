@@ -1,6 +1,16 @@
 
 <?php include "templates/header.php"; ?>
 
+    <form id="loginform" method="post">
+        <div>
+            Username:
+            <input type="text" name="location" id="username" />
+            Password:
+            <input type="password" name="password" id="password" />    
+            <input type="submit" name="loginBtn" id="loginBtn" value="Login" />
+        </div>
+    </form>
+
     <ul>
         <li>
             <a href="create.php"><strong>Create</strong></a> - add a user
