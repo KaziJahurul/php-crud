@@ -13,12 +13,14 @@ $(document).ready(function() {
             type: "POST",
             url: 'login.php',
             data: $(this).serialize(),
+            // dataType: "json",
             success: function(response)
             {
                 var jsonData = JSON.parse(response);
-                // console.log(jsonData.success);
-                var data = jsonData.success;
+                console.log(jsonData);
+                // var data = jsonData.success;
                 // console.log(data);
+                // $( "body" ).append( "<p>" + jsonData + "</p>");
                 
 
                 
